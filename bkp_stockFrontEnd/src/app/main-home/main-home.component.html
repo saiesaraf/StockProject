@@ -1,0 +1,86 @@
+<!--Intro Section-->
+<section class="view intro-2">
+    <div class="full-bg-img mask rgba-gradient">
+      <div class="container flex-center">
+        <div class="d-flex align-items-center content-height w-100">
+          <div class="row flex-center pt-5 mt-3 w-100">
+            <div class="col-md-6 text-center text-md-left mb-5">
+              <div class="white-text">
+                <h2 class="h1 h1-responsive font-bold wow fadeInLeft" data-wow-delay="0.3s">Start making money!
+                   </h2>
+                <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
+                <h6 class="wow fadeInLeft" data-wow-delay="0.3s"> Welcome to your personal web assistant application. This is the application that can help you to make decisions about stocks.
+                   We will tell you which stocks to buy and which to sell, to get maximum profit, so that you can achieve more savings on your hard earned money.
+                  </h6>
+                <br>
+                <a mdbBtn color="white" outline="true" class="wow fadeInLeft waves-light" data-wow-delay="0.3s"
+                  mdbWavesEffect>Learn more</a>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xl-5 offset-xl-1">
+              <!--Form-->
+              <mdb-card class="wow fadeInRight" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInRight; animation-delay: 0.3s;">
+                <div class="card-body">
+                  <!--Header-->
+                  <div class="text-center">
+                    <h3 class="white-text">
+                      <i class="fas fa-user white-text"></i> Login</h3>
+                    <hr class="hr-light">
+                  </div>
+                  <!--Body-->
+                  <form (submit)="LoginUser(loginForm)" #loginForm="ngForm">
+                    <div class="md-form">
+                      <i class="fas fa-envelope prefix white-text"></i>
+                      <input
+                      name="email"
+                      type="email"
+                      ngModel
+                      #emailInput="ngModel"
+                      required
+                      email
+                      id="form2"
+                      class="white-text form-control">
+
+                    </div>
+                    <div class="md-form">
+                      <i class="fas fa-lock prefix white-text"></i>
+                      <input
+                      name="password"
+                      ngModel
+                      type="password"
+                      #passwordInput="ngModel"
+                      required
+                      id="form4"
+                      class="white-text form-control">
+
+                    </div>
+                    <button class="btn btn-indigo waves-effect waves-light" type="submit">Login</button>
+                </form>
+                  <div class="text-center mt-4">
+
+
+                    <div class="inline-ul text-center d-flex justify-content-center">
+                        <a class="p-2 m-2 li-ic">
+                        <i class='fab fa-google' style='font-size:36px; color:white' (click)="signInWithGoogle()"></i>
+                        </a>
+                        <a class="p-2 m-2 li-ic">
+                        <i class='fab fa-facebook-f' style='font-size:36px;color:white' (click)="signInWithFacebook()"></i>
+                      </a>
+                      <a class="p-2 m-2 li-ic">
+                        <i class='fab fa-linkedin-in' style='font-size:36px;color:white'> </i>
+                      </a>
+                      <a class="p-2 m-2 ins-ic">
+                        <i class='fab fa-instagram' style='font-size:36px;color:white'> </i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </mdb-card>
+              <!--/.Form-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

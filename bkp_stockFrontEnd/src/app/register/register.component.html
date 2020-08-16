@@ -1,0 +1,25 @@
+<section class="view intro-2">
+<!-- Default form register -->
+    <form class="text-center border border-none p-5" (submit)="registerUser(registerForm)" #registerForm="ngForm">
+        <p class="h4 mb-4">Register</p>
+        <div class="form-row mb-4">
+            <div class="col">
+         <!-- First name -->
+              <input matInput name="fname" ngModel type="fname" #fnameInput="ngModel" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name">
+            </div>
+           <div class="col">
+           <!-- Last name -->
+            <input matInput name="lname" ngModel type="lname" #lnameInput="ngModel"type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Last name">
+           </div>
+        </div>
+      <!-- E-mail -->
+      <input matInput name="email" ngModel type="email" type="email" #emailInput="ngModel" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail" required email>
+       <!-- Password -->
+       <input  matInput name="password" ngModel type="password" type="password" #passwordInput="ngModel" required password id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+       <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+         At least 8 characters and 1 digit
+       </small>
+      <button mdbBtn color="info" block="true" class="my-4" type="submit">Register</button>
+      </form>
+<!-- Default form register -->
+</section>

@@ -1,0 +1,80 @@
+<ng-container>
+    <form class="example-form" class="add-space">
+      <mat-form-field class="example-full-width">
+        <input
+          type="text"
+          placeholder="Search here Stocks"
+          aria-label="Number"
+          matInput
+          [formControl]="myControl"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete
+          (optionSelected)="OnstockSelected($event.option)"
+          autoActiveFirstOption
+          #auto="matAutocomplete"
+        >
+          <mat-option class="form-text2"
+            *ngFor="let option of filteredOptions | async"
+            [value]="option"
+          >
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+
+
+  <div *ngIf="selected">
+    <form class="text-center border border-none p-5" (submit)="buyStocks(buyStockForm)" #buyStockForm="ngForm">
+        <div class="container" class="form-text">
+            <div class="row" >
+              <div class="col-sm">
+                Stock Name
+              </div>
+              <div class="col-sm">
+                Current Price
+              </div>
+              <div class="col-sm">
+                Predicted Price
+              </div>
+              <div class="col-sm">
+                  Quantity
+                </div>
+                <div class="col-sm">
+                    Total
+                  </div>
+                <div class="col-sm">
+                    Action
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    {{Selectedstock}}
+                  </div>
+                  <div class="col-sm">
+                    {{currentPrice}}
+                  </div>
+                  <div class="col-sm">
+                    {{5000}}
+                  </div>
+                  <div class="col-sm">
+                      <input type="number" class="form-control"
+                      placeholder="0"
+                      step="1"
+                      (input)="onChangeQuantity($event.target.value)">
+                  </div>
+                    <div class="col-sm">
+                        {{currentPrice * selectedQuantity}}
+                      </div>
+
+                    <div class="col-sm">
+                        <button type="submit">Buy Stocks</button>
+                    </div>
+            </div>
+        </div>
+    </form>
+    </div>
+</ng-container>
+
+

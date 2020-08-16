@@ -1,0 +1,88 @@
+<section class="view intro-2">
+<table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+    <ng-container matColumnDef="stockName">
+        <th mat-header-cell *matHeaderCellDef>Stock Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.stockName}}</td>
+      </ng-container>
+
+      <!-- Quantity Column -->
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef>Quantity</th>
+        <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+      </ng-container>
+
+      <!-- Purchased Total Column -->
+      <ng-container matColumnDef="ptotal">
+        <th mat-header-cell *matHeaderCellDef>Purchased Total</th>
+        <td mat-cell *matCellDef="let element">{{ element.ptotal }}</td>
+      </ng-container>
+
+      <!-- Current Total Column -->
+      <ng-container matColumnDef="ctotal">
+          <th mat-header-cell *matHeaderCellDef>Current Total</th>
+          <td mat-cell *matCellDef="let element">{{ element.ctotal }}</td>
+      </ng-container>
+
+      <!-- Profit Column -->
+      <ng-container matColumnDef="profit">
+          <th mat-header-cell *matHeaderCellDef>Profit</th>
+          <td mat-cell *matCellDef="let element">{{ element.profit }}</td>
+      </ng-container>
+
+       <!-- Input Quantity Column -->
+       <ng-container matColumnDef="aquantity">
+          <th mat-header-cell *matHeaderCellDef >Select Quantity</th>
+          <td mat-cell *matCellDef="let element"
+          class="example-element-row"
+          [class.example-expanded-row]="expandedElement === element"
+		      (click)="expandedElement = expandedElement === element ? null : element">
+          <input
+          matInput
+          name="quant"
+          ngModel
+          type="number"
+          placeholder="0"
+          step="1"
+          (input)="onChangeQuantity($event.target.value,element.stockName)"
+        />
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="updatedtotal">
+          <th mat-header-cell *matHeaderCellDef >Total </th>
+          <td mat-cell *matCellDef="let element">
+           {{ element.updatedtotal }}
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let element">
+          <button type="submit" (click)="buyStocks(element.stockName)">Buy Stocks</button>
+        </td>
+      </ng-container>
+
+
+  <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  <!-- Stock Name Column -->
+  <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+        <div class="example-element-detail"
+             [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                Following is the transaction history :
+                <app-transaction class="example-element-detail" [stockNameInput]="element.stockName"></app-transaction>
+        </div>
+  </td>
+</ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
+</section>

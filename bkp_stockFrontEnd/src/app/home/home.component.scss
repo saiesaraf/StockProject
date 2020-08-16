@@ -1,0 +1,91 @@
+.intro-header {
+  height: unset !important;
+}
+
+.intro-2 {
+  background: url("http://mdbootstrap.com/img/Photos/Others/images/91.jpg")no-repeat center center;
+  background-size: cover;
+}
+.view {
+  padding-top: 50px;
+  height: 100vh !important;
+}
+.top-nav-collapse {
+  background-color: #3f51b5 !important;
+}
+.navbar:not(.top-nav-collapse) {
+  background: transparent !important;
+}
+@media (max-width: 768px) {
+  .navbar:not(.top-nav-collapse) {
+    background: #3f51b5 !important;
+  }
+}
+.rgba-gradient .full-bg-img {
+  background: linear-gradient(45deg, rgb(83, 125, 210), rgb(178, 30, 123) 100%),opacity($color: white)
+}
+.full-bg-img {
+  height: 100%;
+}
+.card {
+  background-color: rgb(229, 228, 255),opacity($color:white);
+}
+
+.md-form .prefix {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+.md-form label {
+  color: #ffffff;
+}
+h6 {
+  line-height: 1.7;
+}
+@media (max-width: 740px) {
+  .full-height,
+  .full-height body,
+  .full-height header,
+  .full-height header .view {
+    height: 1040px;
+  }
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+.add-space {
+  padding-top: 20px;
+}
+.example-full-width {
+  width: 100%;
+  background: white;
+}
+
+.form-text {
+  color : white;
+  font-weight: 600;
+}
+
+.form-text2 {
+  color : black;
+  font-weight: 600;
+  background: white;
+}
+
+.row {
+  display: flex;
+  padding-bottom: 20px;
+}
+
+/* Create two equal columns that sits next to each other */
+.column {
+  width: 20%;
+  padding: 10px;
+  /* Should be removed. Only for demonstration */
+}
+
+.white {
+  background: white;
+}
