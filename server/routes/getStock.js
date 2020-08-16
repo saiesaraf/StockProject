@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var data= require('../public/Controller/GetData.js');
-var Plotly = require('plotly')("saie", "etRJFTPJAYfmFmCa2kT8")
 
 /* GET home page. */
 
