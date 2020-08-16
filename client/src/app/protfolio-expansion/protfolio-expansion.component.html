@@ -1,26 +1,26 @@
 <section class="view intro-2">
-<table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+<table  mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
     <ng-container matColumnDef="stockName">
         <th mat-header-cell *matHeaderCellDef>Stock Name</th>
-        <td mat-cell *matCellDef="let element">{{ element.stockName}}</td>
+        <td class="form-text" mat-cell *matCellDef="let element">{{ element.stockName}}</td>
       </ng-container>
 
       <!-- Quantity Column -->
       <ng-container matColumnDef="quantity">
         <th mat-header-cell *matHeaderCellDef>Quantity</th>
-        <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+        <td  mat-cell *matCellDef="let element">{{ element.quantity }}</td>
       </ng-container>
 
       <!-- Purchased Total Column -->
       <ng-container matColumnDef="ptotal">
         <th mat-header-cell *matHeaderCellDef>Purchased Total</th>
-        <td mat-cell *matCellDef="let element">{{ element.ptotal }}</td>
+        <td  mat-cell *matCellDef="let element">{{ element.ptotal }}</td>
       </ng-container>
 
       <!-- Current Total Column -->
       <ng-container matColumnDef="ctotal">
           <th mat-header-cell *matHeaderCellDef>Current Total</th>
-          <td mat-cell *matCellDef="let element">{{ element.ctotal }}</td>
+          <td  mat-cell *matCellDef="let element">{{ element.ctotal }}</td>
       </ng-container>
 
       <!-- Profit Column -->
@@ -58,7 +58,7 @@
 
       <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef>Action</th>
-          <td mat-cell *matCellDef="let element">
+          <td  mat-cell *matCellDef="let element">
           <button type="submit" (click)="buyStocks(element.stockName)">Buy Stocks</button>
         </td>
       </ng-container>
