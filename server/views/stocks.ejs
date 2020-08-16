@@ -1,0 +1,40 @@
+
+<html>
+        
+        <head>
+            <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        </head>
+
+
+                   <body>
+                   <!-- Plotly chart will be drawn inside this div -->
+                   <div id="myDiv" style="width: 480px; height: 400px;"><!-- Plotly chart will be drawn inside this DIV --></div>
+                   <script>
+
+                                var data = [{ 
+                                    type: 'bar', 
+                                    x: ['1','2','3'],
+                                    y: ['giraffes', 'orangutans', 'monkeys'], 
+                                    orientation: 'h' 
+                                }];
+
+                                Plotly.newPlot('myDiv', data);
+                   </script>                     
+                   </body>
+                 </html>
+    <h1>
+        Saie is hot
+    </h1>
+    <a href="https://plot.ly/~saie/0/#/"> </a>
+
+    <table>
+        <% for(var i=0; i < stocks.length; i++) { %>
+           <tr>
+             <td><%= stocks[i].stockName %></td>
+             <td><%= stocks[i].date %></td>
+             <td><%= stocks[i].close %></td>
+           </tr>
+        <% } %>
+    </table>
+
+</html>
