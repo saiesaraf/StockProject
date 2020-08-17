@@ -29,7 +29,7 @@ export class DataService {
   selectedTransaction: string;
 
   constructor(private http: HttpClient) {
-    this.localUrl = "https://my-stocksapp-server.herokuapp.com/";
+    this.localUrl = "https://my-stocksapp-server.herokuapp.com";
     this.stockUrl = this.localUrl + "/stocks/";
     this.isloggedin = false;
     this.selected = false;
