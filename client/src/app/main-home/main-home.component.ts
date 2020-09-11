@@ -28,17 +28,19 @@ export class MainHomeComponent implements OnInit {
 
   signInWithGoogle(): void {
     console.log('here');
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(x => {
-      console.log(x);
-      this.data.isloggedin = true;
-      this.data.userId = x.email;
-      console.log('user email is' + this.data.userId);
-      this.flashMessage.show('You are now logged in successfully!', {
-        cssClass: 'alert-success',
-        timeout: 3000
-      });
-      this.router.navigate(['home1']);
-    });
+    if (this.data.isloggedin == false) {
+        this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(x => {
+          console.log(x);
+          this.data.isloggedin = true;
+          this.data.userId = x.email;
+          console.log('user email is' + this.data.userId);
+          this.flashMessage.show('You are now logged in successfully!', {
+            cssClass: 'alert-success',
+            timeout: 3000
+          });
+          this.router.navigate(['home1']);
+        });
+  }
   }
 
   signInWithFacebook(): void {

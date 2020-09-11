@@ -24,56 +24,60 @@
       </mat-form-field>
     </form>
 
+    <div *ngIf="selected">
+        <table class="table-width" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="stockName">
+                <th mat-header-cell *matHeaderCellDef>Stock Name</th>
+                <td mat-cell *matCellDef="let element">{{ element.stockName}}</td>
+              </ng-container>
 
-  <div *ngIf="selected">
-    <form class="text-center border border-none p-5" (submit)="buyStocks(buyStockForm)" #buyStockForm="ngForm">
-        <div class="container" class="form-text">
-            <div class="row" >
-              <div class="col-sm">
-                Stock Name
-              </div>
-              <div class="col-sm">
-                Current Price
-              </div>
-              <div class="col-sm">
-                Predicted Price
-              </div>
-              <div class="col-sm">
-                  Quantity
-                </div>
-                <div class="col-sm">
-                    Total
-                  </div>
-                <div class="col-sm">
-                    Action
-                  </div>
-            </div>
-            <div class="row">
-                <div class="col-sm">
-                    {{Selectedstock}}
-                  </div>
-                  <div class="col-sm">
-                    {{currentPrice}}
-                  </div>
-                  <div class="col-sm">
-                    {{5000}}
-                  </div>
-                  <div class="col-sm">
-                      <input type="number" class="form-control"
-                      placeholder="0"
-                      step="1"
-                      (input)="onChangeQuantity($event.target.value)">
-                  </div>
-                    <div class="col-sm">
-                        {{currentPrice * selectedQuantity}}
-                      </div>
+              <!-- Quantity Column -->
+              <ng-container matColumnDef="cPrice">
+                <th mat-header-cell *matHeaderCellDef>Current Price</th>
+                <td  mat-cell *matCellDef="let element">{{ element.cPrice }}</td>
+              </ng-container>
 
-                    <div class="col-sm">
-                        <button type="submit">Buy Stocks</button>
-                    </div>
-            </div>
-        </div>
-    </form>
+              <!-- Purchased Total Column -->
+              <ng-container matColumnDef="predPrice">
+                <th mat-header-cell *matHeaderCellDef>Predicted Price</th>
+                <td  mat-cell *matCellDef="let element">{{ element.predPrice }}</td>
+              </ng-container>
+
+              <!-- Input Quantity Column -->
+              <ng-container matColumnDef="Quantity">
+                  <th mat-header-cell *matHeaderCellDef >Select Quantity</th>
+                  <td mat-cell *matCellDef="let element"
+                  class="example-element-row">
+                  <input
+                  matInput
+                  name="quant"
+                  ngModel
+                  type="number"
+                  placeholder="0"
+                  step="1"
+                  (input)="onChangeQuantity($event.target.value)"
+                />
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Total">
+                  <th mat-header-cell *matHeaderCellDef >Total </th>
+                  <td mat-cell *matCellDef="let element">
+                  {{ element.Total }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef>Action</th>
+                  <td  mat-cell *matCellDef="let element">
+                      <button mat-button [disabled]="isInvalid(element.Quantity)" type="submit" (click)="buyStocks(element.stockName)">Buy </button> &nbsp;&nbsp;&nbsp;
+                      <button mat-button [disabled]="isInvalid(element.Quantity)" type="submit" (click)="sellStocks(element.stockName)">Sell </button>
+
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
     </div>
 </ng-container>
 

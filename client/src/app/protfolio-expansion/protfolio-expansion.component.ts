@@ -79,7 +79,7 @@ constructor(
     this.userStockSymbols = [];
   }
 
-ngOnInit(): void {
+ngOnInit() {
     let tempDataSource = [];
     this.user = this.data.userId;
     console.log("In portfolio component" + this.user);
@@ -88,15 +88,18 @@ ngOnInit(): void {
       this.portfolio = portfoliodetails;
       for (let i = 0; i < portfoliodetails.length; i++) {
         const tempObject = portfoliodetails[i];
+        if (tempObject.quantity == 0) {
+          continue;
+        }
         let cPrice1: number;
         this.data
           .getStockBySymbol(tempObject.stockName)
-          .subscribe(currentPrice => {
+          .subscribe(async currentPrice => {
             this.stockValue = JSON.stringify(currentPrice);
             let obj: MyObj = JSON.parse(this.stockValue);
             cPrice1 = obj.price;
             const tempData: DataInterface = {
-              stockName: tempObject.stockName,
+              stockName: await this.getStockName(tempObject.stockName),
               quantity: tempObject.quantity,
               ptotal: tempObject.total.toFixed(2),
               cPrice: cPrice1,
@@ -115,6 +118,12 @@ ngOnInit(): void {
           });
       }
     });
+  }
+
+  async getStockName(stockSymbol: string) {
+    const companyName = (Object.keys(this.data.myMapData) as Array<string>).find(key => this.data.myMapData[key] === stockSymbol);
+    console.log('company name is' + companyName);
+    return companyName;
   }
 
 onChangeQuantity(onChangeQuantity: number, stockName: string): void {
@@ -187,5 +196,83 @@ buyStocks(stockName: string) {
         console.log('could not insert transaction');
       }
   });
+}
+
+sellStocks(stockName: string) {
+  console.log("I am in sell Stocks");
+  const currStock = this.dataSource.data.find(
+      stock => stock.stockName == stockName
+    );
+  console.log("updated quantity is" + currStock.aquantity);
+  const tempData1: DataInterface = {
+      stockName: currStock.stockName,
+      quantity: currStock.quantity,
+      ptotal: currStock.ptotal,
+      cPrice: currStock.cPrice,
+      ctotal: currStock.ctotal,
+      profit: currStock.profit,
+      updatedtotal: Number(currStock.updatedtotal.toFixed(2)),
+      aquantity: currStock.aquantity
+    };
+  const portfolio: sendStock = {
+      username: this.data.userId,
+      stockName: currStock.stockName,
+      quantity: Number(currStock.aquantity)
+    };
+
+  this.data.deletePortfolio(portfolio).subscribe(deletedPortfolio => {
+      if (deletedPortfolio["success"]) {
+        this.ngOnInit();
+        /*this.flashMessage.show("Successfully added in portfolio", {
+          cssClass: "alert-success",
+          timeout: 3000
+        });
+        );
+      } else {
+        this.flashMessage.show("There was some error", {
+          cssClass: "alert-danger",
+          timeout: 3000
+        });*/
+      }
+    });
+
+  const userTrasaction: SendTransaction = {
+      username: this.data.userId,
+      stockName: currStock.stockName,
+      quantity: Number(currStock.aquantity),
+      price: Number(currStock.cPrice),
+      total: Number(currStock.updatedtotal),
+      date: moment().format("YYYY-MM-DD"),
+      action: 'Sell'
+    };
+  console.log('user transaction is');
+  console.log('user is' + this.user);
+  this.data.insertTransaction(userTrasaction).subscribe(insertedTransaction => {
+      if (insertedTransaction['success']) {
+        console.log('inserted transaction successfully');
+      } else {
+        console.log('could not insert transaction');
+      }
+  });
+}
+
+isInvalidBuy(quantityFromUser: number): boolean {
+  if (quantityFromUser <= 0 || quantityFromUser >= 500) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+isInvalidSell(quantityFromUser: number, stockNameUser: string): boolean {
+  const currStock = this.dataSource.data.find(
+    stock => stock.stockName == stockNameUser
+  );
+  const currentquant = currStock.quantity;
+  if (quantityFromUser > currentquant || quantityFromUser <= 0 ) {
+    return true;
+  } else {
+    return false;
+  }
 }
 }

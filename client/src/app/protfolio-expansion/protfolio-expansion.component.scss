@@ -83,7 +83,7 @@ tr.example-detail-row {
 }
 
 tr.example-element-row:not(.example-expanded-row):hover {
-  background: whitesmoke;
+  background: black;
 }
 
 tr.example-element-row:not(.example-expanded-row):active {
@@ -123,6 +123,29 @@ tr.example-element-row:not(.example-expanded-row):active {
 
 .example-element-description-attribution {
   opacity: 0.5;
+}
+
+.mat-cell {
+  color: white;
+}
+
+table {
+  width: 100%;
+  border-spacing: 0 8px !important;
+}
+
+td.mat-cell {
+ padding: 16px 0 16px 0;
+ border-bottom: 2px solid black;
+ //border-top: 2px solid black;
+}
+
+td.mat-cell:first-child {
+  //border-left: 2px solid black;
+}
+
+td.mat-cell:last-child {
+  //border-right: 2px solid black;
 }
 
 

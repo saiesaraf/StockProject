@@ -2,7 +2,7 @@
 <table  mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
     <ng-container matColumnDef="stockName">
         <th mat-header-cell *matHeaderCellDef>Stock Name</th>
-        <td class="form-text" mat-cell *matCellDef="let element">{{ element.stockName}}</td>
+        <td mat-cell *matCellDef="let element">{{ element.stockName}}</td>
       </ng-container>
 
       <!-- Quantity Column -->
@@ -26,7 +26,8 @@
       <!-- Profit Column -->
       <ng-container matColumnDef="profit">
           <th mat-header-cell *matHeaderCellDef>Profit</th>
-          <td mat-cell *matCellDef="let element">{{ element.profit }}</td>
+          <td mat-cell [ngStyle]="{'color':element.profit >0  ? 'green':'red'}"
+          *matCellDef="let element">{{ element.profit }}</td>
       </ng-container>
 
        <!-- Input Quantity Column -->
@@ -55,11 +56,14 @@
         </td>
       </ng-container>
 
-
       <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef>Action</th>
-          <td  mat-cell *matCellDef="let element">
-          <button type="submit" (click)="buyStocks(element.stockName)">Buy Stocks</button>
+          <td  mat-cell *matCellDef="let element"
+              class="example-element-row"
+              [class.example-expanded-row]="expandedElement === element"
+              (click)="expandedElement = expandedElement === element ? null : element">
+          <button [disabled]="isInvalidBuy(element.aquantity)" type="submit" (click)="buyStocks(element.stockName)">Buy Stocks</button> &nbsp;&nbsp;&nbsp;
+          <button [disabled]="isInvalidSell(element.aquantity,element.stockName)" type="submit" (click)="sellStocks(element.stockName)">Sell Stocks</button>
         </td>
       </ng-container>
 

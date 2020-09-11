@@ -11,14 +11,16 @@ interface sendStock {
   providedIn: "root"
 })
 export class DataService {
-
+  companiesUrl: string;
   registerUrl: string;
   loginUrl: string;
   stockUrl: string;
   localUrl: string;
+  localUrl1: string;
   stockSymbol: string;
   userId: string;
   portfolioUrl: string;
+  portfolioUrlRemove: string;
   getportfolioUrl: string;
   getHistoricalDataUrl: string;
   transactionUrl: string;
@@ -26,26 +28,24 @@ export class DataService {
   public isloggedin: boolean;
   selected: boolean;
   stockMap: Record<string, string> = {};
+  myMapData: Record<string, string> = {};
   selectedTransaction: string;
 
   constructor(private http: HttpClient) {
     this.localUrl = "https://my-stocksapp-server.herokuapp.com";
+    this.localUrl1 ="http://localhost:3000"
     this.stockUrl = this.localUrl + "/stocks/";
     this.isloggedin = false;
     this.selected = false;
     this.loginUrl = this.localUrl + "/user/login";
     this.registerUrl = this.localUrl + "/user/register";
     this.portfolioUrl = this.localUrl + "/portfolio/insert";
+    this.portfolioUrlRemove = this.localUrl1 + "/portfolio/remove";
     this.getportfolioUrl = this.localUrl + "/portfolio/";
     this.getHistoricalDataUrl = this.localUrl + "/history/historical/";
     this.transactionUrl = this.localUrl + "/transactions/"
-    this.gettransactionUrl = this.localUrl + "/transactions/";
-
-    this.stockMap["Amazon"] = "amzn";
-    this.stockMap["Microsoft"] = "msft";
-    this.stockMap["Apple"] = "aapl";
-    this.stockMap["Tesla"] = "tsla";
-
+    this.gettransactionUrl = this.localUrl1 + "/transactions/";
+    this.companiesUrl = this.localUrl1 + "/companies";
   }
 
   getStock() {
@@ -85,5 +85,14 @@ export class DataService {
   gettransaction() {
     const completeUrl = this.gettransactionUrl + this.userId + '/' + this.selectedTransaction;
     return this.http.get<any>(completeUrl);
+  }
+
+  deletePortfolio(portfolio: sendStock) {
+    console.log('portfolio insert ===== ', portfolio);
+    return this.http.post<sendStock>(this.portfolioUrlRemove, portfolio);
+  }
+
+  getCompanies() {
+    return this.http.get<any>(this.companiesUrl);
   }
 }

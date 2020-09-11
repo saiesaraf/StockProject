@@ -1,6 +1,6 @@
 <section class="view intro-2">
 <app-home></app-home>
-<div *ngIf="data.selected">
-<app-stockgraph></app-stockgraph>
+<div class="example-padding" *ngIf="data.selected">
+<app-stockgraph [stockselected]="data.stockSymbol"></app-stockgraph>
 </div>
 </section>
