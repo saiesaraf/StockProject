@@ -44,6 +44,45 @@ async function updatePortfolio(
   );
 }
 
+async function removePortfolio(
+  previousPortfolio,
+  stockName,
+  quantity,
+  total,
+  res
+) {
+  previousQuantity = previousPortfolio.quantity;
+  const newQuantity = previousQuantity - quantity;
+  previousTotal = total;
+  const stockDetails = await data1.getData(stockName);
+  const currentPrice = stockDetails.price;
+
+  const updatedPortfolio = {
+    username: previousPortfolio.username,
+    stockName: stockName,
+    quantity: newQuantity,
+    total: previousTotal + currentPrice * quantity
+  };
+
+  console.log("updatedPortfolio" + JSON.stringify(updatedPortfolio));
+  var options = { new: true, useFindAndModify: false };
+
+  portfolioModel.findOneAndUpdate(
+    { username: previousPortfolio.username, stockName: stockName },
+    updatedPortfolio,
+    options,
+    function(err, updatedvalue) {
+      if (err) {
+        res.json({ success: false, msg: err });
+        console.log("got an error" + err);
+      } else {
+        console.log(updatedvalue + "inserted documebnt");
+        res.json({ success: true });
+      }
+    }
+  );
+}
+
 async function createNewPortfolio(username, stockName, quantity, res) {
   console.log("stockName is" + stockName);
   const stockDetails = await data1.getData(stockName);
@@ -132,5 +171,28 @@ router.get("/:userid", async function(req, res, next) {
   });
   res.send(portfolio_temp);
 });
+
+router.post("/remove", async function(req,res,next) {
+  const previousPortfolio = await portfolioModel.findOne({
+    username: req.body.username,
+    stockName: req.body.stockName
+  });
+  console.log("previousPortfolio is" + previousPortfolio);
+  console.log("previous quantity from previous Portfolio is" + previousPortfolio.quantity);
+  if (previousPortfolio !== null) {
+    console.log("in update");
+    const removedQuan = req.body.quantity;
+    console.log("quantity to remove is" + req.body.quantity);
+    await removePortfolio(
+      previousPortfolio,
+      req.body.stockName,
+      removedQuan,
+      previousPortfolio.total,
+      res
+    );
+  } else {
+    res.json({ success: false, msg: err });
+  }
+})
 
 module.exports = router;

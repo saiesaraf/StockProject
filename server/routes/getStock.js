@@ -21,5 +21,9 @@ router.get('/showdetails/:stockName',async (req,res,next) =>
     } catch(error) {
         next(error)
     }
-})
+});
+
+
+
+
 module.exports = router;

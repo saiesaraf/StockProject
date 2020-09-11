@@ -6,7 +6,7 @@ var portfolioRouter = require("./routes/PortfolioRouter");
 var userRouter = require("./routes/users");
 var historyRouter = require("./routes/getHistorical");
 var transactionRouter = require("./routes/getTransactions");
-
+var companyRouter = require("./routes/getCompanies");
 var app = express();
 const mongoose = require("mongoose");
 // view engine setup
@@ -28,6 +28,7 @@ app.use("/portfolio", portfolioRouter);
 app.use("/user", userRouter);
 app.use("/history", historyRouter);
 app.use("/transactions", transactionRouter);
+app.use("/companies",companyRouter);
 mongoose.connect(
   "mongodb+srv://saiesaraf:April@2020@cluster0-5czsu.mongodb.net/stocks?retryWrites=true&w=majority",
   {
