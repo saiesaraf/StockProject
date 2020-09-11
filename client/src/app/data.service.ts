@@ -40,12 +40,12 @@ export class DataService {
     this.loginUrl = this.localUrl + "/user/login";
     this.registerUrl = this.localUrl + "/user/register";
     this.portfolioUrl = this.localUrl + "/portfolio/insert";
-    this.portfolioUrlRemove = this.localUrl1 + "/portfolio/remove";
+    this.portfolioUrlRemove = this.localUrl + "/portfolio/remove";
     this.getportfolioUrl = this.localUrl + "/portfolio/";
     this.getHistoricalDataUrl = this.localUrl + "/history/historical/";
     this.transactionUrl = this.localUrl + "/transactions/"
-    this.gettransactionUrl = this.localUrl1 + "/transactions/";
-    this.companiesUrl = this.localUrl1 + "/companies";
+    this.gettransactionUrl = this.localUrl + "/transactions/";
+    this.companiesUrl = this.localUrl + "/companies";
   }
 
   getStock() {
